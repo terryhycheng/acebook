@@ -31,8 +31,6 @@ const Feed = () => {
 
   return (
     <>
-      <h2>Posts</h2>
-
       <NewPost getPosts={getPosts} />
 
       <div id="feed" className="flex flex-col gap-4" role="feed">

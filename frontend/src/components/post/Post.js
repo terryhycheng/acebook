@@ -88,16 +88,23 @@ const Post = ({ post }) => {
 
 Post.propTypes = {
   post: PropTypes.shape({
-    _id: PropTypes.string,
-    message: PropTypes.string,
-    authorId: PropTypes.string,
-    createdAt: PropTypes.string,
-    likes: PropTypes.arrayOf(PropTypes.string),
+    _id: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    likes: PropTypes.arrayOf(PropTypes.string).isRequired,
     author: PropTypes.shape({
-      username: PropTypes.string,
+      username: PropTypes.string.isRequired,
       imageId: PropTypes.string,
     }),
-  }).isRequired,
+  }),
+};
+
+Post.defaultProps = {
+  post: PropTypes.shape({
+    author: PropTypes.shape({
+      imageId: "",
+    }),
+  }),
 };
 
 export default Post;
