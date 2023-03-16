@@ -1,4 +1,5 @@
-import React, { useContext, Fragment, useState } from "react";
+import React, { useContext, useState } from "react";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../../contexts/AuthContext";
 import Button from "../button/Button";
 import ProfilePicture from "../profilePicture/ProfilePicture";
@@ -8,12 +9,14 @@ const UserInfo = () => {
   const { user } = useContext(AuthContext);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState(null);
 
   function closeModal() {
     setIsOpen(false);
   }
 
-  function openModal() {
+  function openModal(i) {
+    setType(i);
     setIsOpen(true);
   }
 
@@ -23,30 +26,44 @@ const UserInfo = () => {
         <ProfilePicture className="mr-4 h-32 w-32" publicId={user.imageId} />
 
         <div className="flex flex-col justify-between">
-          <div>
+          <div className="flex items-center">
             {user.name}
             <button
               type="button"
-              onClick={openModal}
-              className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+              onClick={() => openModal("name")}
+              className="ml-1"
             >
-              Edit
+              <PencilIcon className="h-4 w-4 text-blue-500" />
+            </button>
+          </div>
+
+          <div className="flex items-center">
+            {user.email}
+            <button
+              type="button"
+              onClick={() => openModal("email")}
+              className="ml-1"
+            >
+              <PencilIcon className="h-4 w-4 text-blue-500" />
             </button>
           </div>
 
           <div>
-            {user.email}
-            <Button text="Edit" className="ml-4 w-max" />
-          </div>
-
-          <div>
-            <Button text="Change Photo" className="mr-4 w-max" />
-            <Button text="Change Password" className="w-max" />
+            <Button
+              id="changePhoto"
+              text="Change Photo"
+              className="mr-4 w-max"
+            />
+            <Button
+              id="changePassword"
+              text="Change Password"
+              className="w-max"
+            />
           </div>
         </div>
       </div>
 
-      <ChangeModal isOpen={isOpen} closeModal={closeModal} />
+      <ChangeModal isOpen={isOpen} closeModal={closeModal} type={type} />
     </>
   );
 };

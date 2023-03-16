@@ -5,15 +5,15 @@ import Button from "../button/Button";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ModalContext } from "../../contexts/ModalContext";
 
-const ChangeModal = ({ isOpen, closeModal }) => {
-  const [name, setName] = useState("");
-  const { setToken, setUser } = useContext(AuthContext);
+const ChangeModal = ({ isOpen, closeModal, type }) => {
+  const [info, setInfo] = useState("");
+  const { token, setToken, setUser } = useContext(AuthContext);
   const { pushModal } = useContext(ModalContext);
 
   const [isLoading, setIsLoading] = useState(null);
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    setInfo(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -22,14 +22,17 @@ const ChangeModal = ({ isOpen, closeModal }) => {
     setIsLoading(true);
 
     const response = await fetch("/users", {
-      method: "patch",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ name }),
+      body: JSON.stringify({ [type]: info }),
     });
 
     const data = await response.json();
+
+    console.log(data.user);
 
     if (response.ok) {
       window.localStorage.setItem("token", data.token);
@@ -42,9 +45,8 @@ const ChangeModal = ({ isOpen, closeModal }) => {
         type: "error",
       });
     }
-
+    setInfo("");
     setIsLoading(false);
-    console.log(name);
   };
 
   return (
@@ -78,21 +80,20 @@ const ChangeModal = ({ isOpen, closeModal }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Change your name
+                  Change your {type}
                 </Dialog.Title>
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Change the name you want associated with your account.
+                    Change the {type} you want associated with your account.
                   </p>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                   <div className="space-y-4">
                     <input
-                      placeholder="Name"
-                      id="name"
-                      type="text"
+                      id={type}
+                      type={type === "email" ? "email" : "text"}
                       required
-                      value={name}
+                      value={info}
                       onChange={handleNameChange}
                       className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
                     />
@@ -116,6 +117,7 @@ const ChangeModal = ({ isOpen, closeModal }) => {
 ChangeModal.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   closeModal: PropTypes.func.isRequired,
+  type: PropTypes.oneOf(["name", "email"]).isRequired,
 };
 
 export default ChangeModal;
