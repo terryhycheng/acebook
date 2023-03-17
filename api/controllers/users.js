@@ -4,44 +4,46 @@ const generateToken = require("../models/token_generator");
 
 const createUser = async (req, res) => {
   try {
-    const { name, username, email, password } = req.body;
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: "Username already in use" });
-    }
-    const existingEmail = await User.findOne({ email });
-    if (existingEmail) {
-      return res.status(400).json({ message: "Email already in use" });
-    }
+    const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync())
 
-    const newUser = new User({
-      name,
-      username,
-      email,
-      password: bcrypt.hashSync(password, bcrypt.genSaltSync()),
-    });
-    await newUser.save();
-    delete newUser.password;
+    let user = await User.create({password, ...req.body});
 
-    const token = generateToken(newUser._id);
-    return res.status(201).json({
-      token,
-      user: newUser,
-      message: "You've successfully signed up. Please log in.",
-    });
+    user = user.toObject()
+
+    delete user.password;
+    delete user.__v;
+    const token = generateToken(user._id);
+
+    res.status(201).json({ user, token });
   } catch (err) {
-    return res.status(400).json({ message: "Bad request" });
+    res.status(400).json({ message: err.message });
   }
 };
 
 const getUser = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.userId }, "username name email");
-    const token = generateToken(req.userId);
+    const user = await User.findOne(
+      { _id: req.userId },
+      { password: 0, __v: 0 }
+    );
+    const token = generateToken(user._id);
     res.status(200).json({ user, token });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-module.exports = { createUser, getUser };
+const updateUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: req.userId }, req.body, {
+      projection: { password: 0, __v: 0 },
+      new: true,
+    });
+    const token = generateToken(user._id);
+    res.status(200).json({ user, token });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
+
+module.exports = { createUser, getUser, updateUser };

@@ -16,11 +16,10 @@ const login = async (req, res) => {
   if (!passwordIsMatch) {
     return res.status(401).json({ message: "Incorrect password" });
   }
-  const token = generateToken(user._id);
 
   delete user.password;
-  delete user._id;
   delete user.__v;
+  const token = generateToken(user._id);
 
   return res.status(201).json({ token, user, message: "Login Successful" });
 };
