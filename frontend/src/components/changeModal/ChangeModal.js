@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import ChangeNameForm from "../changeNameForm/ChangeNameForm";
 import ChangeEmailForm from "../changeEmailForm/ChangeEmailForm";
 import ChangeImageForm from "../changeImageForm/ChangeImageForm";
+import ChangePasswordForm from "../changePasswordForm/ChangePasswordForm";
 
 const ChangeModal = ({ isOpen, closeModal, type }) => {
   return (
@@ -47,6 +48,7 @@ const ChangeModal = ({ isOpen, closeModal, type }) => {
                     name: <ChangeNameForm closeModal={closeModal} />,
                     email: <ChangeEmailForm closeModal={closeModal} />,
                     image: <ChangeImageForm closeModal={closeModal} />,
+                    password: <ChangePasswordForm closeModal={closeModal} />,
                   }[type]
                 }
               </Dialog.Panel>

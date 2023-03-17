@@ -25,16 +25,14 @@ const ChangeEmailForm = ({ closeModal }) => {
 
   return (
     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-      <div className="space-y-4">
-        <input
-          id="email"
-          type="email"
-          required
-          value={email}
-          onChange={handleEmailChange}
-          className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
-        />
-      </div>
+      <input
+        id="email"
+        type="email"
+        required
+        value={email}
+        onChange={handleEmailChange}
+        className="relative block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-blue-600"
+      />
       <Button
         text="Submit Change"
         type="submit"

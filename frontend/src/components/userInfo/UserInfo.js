@@ -59,6 +59,7 @@ const UserInfo = () => {
               id="changePassword"
               text="Change Password"
               className="w-max"
+              clickCallback={() => openModal("password")}
             />
           </div>
         </div>

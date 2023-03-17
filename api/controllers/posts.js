@@ -6,7 +6,7 @@ const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
       .sort({ createdAt: -1 })
-      .populate("author", "username");
+      .populate("author", "username imageId");
     const token = await generateToken(req.userId);
     res.status(200).json({ posts, token });
   } catch (error) {
@@ -103,7 +103,7 @@ const getPostComments = async (req, res) => {
 
     const comments = await Comment.find({ postId }).populate(
       "author",
-      "username"
+      "username imageId"
     );
     const token = await generateToken(req.userId);
 
