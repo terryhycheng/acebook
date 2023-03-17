@@ -4,11 +4,10 @@ const generateToken = require("../models/token_generator");
 
 const createUser = async (req, res) => {
   try {
-    const password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync())
-
-    let user = await User.create({password, ...req.body});
-
-    user = user.toObject()
+    let user = req.body;
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
+    user = await User.create(user);
+    user = user.toObject();
 
     delete user.password;
     delete user.__v;
@@ -35,7 +34,13 @@ const getUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const user = await User.findOneAndUpdate({ _id: req.userId }, req.body, {
+    let user = req.body;
+
+    if (user.password) {
+      user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync());
+    }
+
+    user = await User.findOneAndUpdate({ _id: req.userId }, user, {
       projection: { password: 0, __v: 0 },
       new: true,
     });
