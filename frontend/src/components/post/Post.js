@@ -121,7 +121,7 @@ const Post = ({ post }) => {
             {formatDate()}
           </div>
         </div>
-        <div className="my-2 mt-4 overflow-auto text-base">{post.message}</div>
+        <div className="mt-4 overflow-auto text-base">{post.message}</div>
       </div>
       <div className="flex max-h-[45vh] overflow-hidden">
         <AdvancedImage
