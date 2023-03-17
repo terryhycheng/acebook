@@ -22,8 +22,8 @@ const UserInfo = () => {
 
   return (
     <>
-      <div className="flex w-max rounded-2xl border p-4 shadow-sm">
-        <ProfilePicture className="mr-4 h-32 w-32" publicId={user.imageId} />
+      <div className="mt-6 flex w-full rounded-2xl border border-gray-100 bg-white p-6">
+        <ProfilePicture className="mr-6 h-32 w-32" publicId={user.imageId} />
 
         <div className="flex flex-col justify-between">
           <div className="flex items-center">
@@ -52,7 +52,8 @@ const UserInfo = () => {
             <Button
               id="changePhoto"
               text="Change Photo"
-              className="mr-4 w-max"
+              className="mr-6 w-max"
+              clickCallback={() => openModal("image")}
             />
             <Button
               id="changePassword"
