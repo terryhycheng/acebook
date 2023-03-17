@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import contextualTime from "../../helpers/contextualTime";
-import avatar from "../../assets/avatar.png";
+import ProfilePicture from "../profilePicture/ProfilePicture";
 
 const Comment = ({ comment }) => {
   const formatDate = () => {
@@ -17,10 +17,9 @@ const Comment = ({ comment }) => {
       className="flex flex-col rounded-md border border-gray-200 p-4 transition-all hover:bg-gray-100"
     >
       <div className="flex">
-        <img
-          src={avatar}
-          alt="Avatar"
-          className="mx-2 h-10 w-10 rounded-full"
+        <ProfilePicture
+          className="h-10 w-10"
+          publicId={comment.authorImageId}
         />
         <div className="">
           <p className="text-lg font-semibold">{comment.authorName}</p>
@@ -38,6 +37,7 @@ Comment.propTypes = {
     message: PropTypes.string,
     createdAt: PropTypes.string,
     authorName: PropTypes.string.isRequired,
+    authorImageId: PropTypes.string.isRequired,
   }).isRequired,
 };
 

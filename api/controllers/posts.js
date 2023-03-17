@@ -105,6 +105,7 @@ const getPostComments = async (req, res) => {
       "author",
       "username imageId name"
     );
+
     const token = await generateToken(req.userId);
 
     // If no comments are found, return an error
@@ -120,6 +121,7 @@ const getPostComments = async (req, res) => {
         id: comment.id,
         message: comment.message,
         authorName: comment.author.username,
+        authorImageId: comment.author.imageId,
         createdAt: comment.createdAt,
         likes: comment.likes,
       };
