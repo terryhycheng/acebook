@@ -11,12 +11,9 @@ const login = async (req, res) => {
   } else if (user.password !== password) {
     res.status(401).json({ message: "Incorrect password" });
   } else {
-    const token = generateToken(user._id);
-
     delete user.password;
-    delete user._id;
     delete user.__v;
-
+    const token = generateToken(user._id);
     res.status(201).json({ token, user });
   }
 };

@@ -33,7 +33,10 @@ const AuthContextProvider = ({ children }) => {
     }
   }, []);
 
-  const context = useMemo(() => ({ token, setToken, user, setUser }), [token]);
+  const context = useMemo(
+    () => ({ token, setToken, user, setUser }),
+    [token, user]
+  );
 
   return (
     <AuthContext.Provider value={context}>{children}</AuthContext.Provider>
