@@ -1,187 +1,149 @@
-# Acebook
+<a name="readme-top"></a>
 
-In this project, you are tasked with working on an existing application. A significant part of the challenge will be to familiarise yourself with the codebase you've inherited, as you work to **improve and extend** it.
+<br />
+<!-- PROJECT LOGO -->
+<div align="center">
+  <a href="https://github.com/terryhycheng/acebook">
+    <img src="./frontend/public/logo.png" alt="Logo" width="60" height="60">
+  </a>
 
-## Videos
+<h3 align="center">Acebook</h3>
+<p>Scalable MERN Stack Social Network - User Connections Simplified</p>
 
-These videos complement the docs below.
+  <p align="center">
+    <a href="https://acebook-frontend-gwmk.onrender.com/">View Demo</a>
+    ·
+    <a href="https://github.com/terryhycheng/acebook/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/terryhycheng/acebook/issues">Request Feature</a>
+  </p>
+</div>
 
-* [An overview of the app](https://youtu.be/meTABGgrO2c)
-* [The backend (api)](https://youtu.be/mFczOzWW3vo)
-* [Postman](https://youtu.be/VO_kinuJngA)
+<!-- TABLE OF CONTENTS -->
 
-## Existing Features
+## Table of Contents
 
-It's already possible for a user to:
-- Sign up
-- Sign in
-- Sign out
-- View a list of posts
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Features](#features)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Start](#start)
+    - [1. Start the server](#1-start-the-server)
+    - [2. Start the frontend](#2-start-the-frontend)
+- [Contributors](#contributors)
 
-## Technologies
+<!-- ABOUT THE PROJECT -->
 
-Here's an overview of the technologies used to build this template application. You don't need to do a deep dive on each one right now. Instead, try to get a feeling for the big picture and then dive into the details when a specific task pushes you in that direction.
+## About The Project
 
-### **M** is for MongoDB
-[MongoDB](https://www.mongodb.com/) is a _NoSQL_ database program that stores data in collections of documents (in a format similar to JSON), rather than in tables. The application interacts with MongoDB using a tool called Mongoose.
+![preview](./frontend/public/website-preview.png)
 
-### **E** is for Express
-[Express](https://expressjs.com/) is the Javascript equivalent of Sinatra. The structure of this application will feel quite different to what you're used to but the principles are the same.
+Acebook is a full-stack web application built with the **MERN stack** that aims to replicate some of the core features and functionality of the popular social media platform, Facebook.
 
-### **R** is for React
-[React](https://reactjs.org/) is a hugely popular tool that is used to build engaging front ends. The basic principle is that the front end is split up into _components_, each of which _could_ include some logic, template structure (HTML) and styling (CSS).
+This project provides users with a platform where they can connect with friends, share posts, photos and react to other users' content, just like on Facebook. The application has been developed using modern web development technologies and best practices, making it a robust and scalable solution for anyone interested in building a similar social networking application.
 
-### **N** is for Node
-Java script was originally designed to run exclusively in browsers, such as Chrome. [Node](https://nodejs.org/en/) is a tool that allows you to run Javascript outside the browser and its invention made it possible to build full stack Javascript apps.
+Acebook was built by a team of **six developers** who utilize **Agile methodologies** and a **Git workflow** to collaborate efficiently and deliver high-quality code on time.
 
-We also used...
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- [Jest](https://jestjs.io/) for unit testing on the back end
-- [Cypress](https://www.cypress.io/) for end-to-end testing and component testing, on the front end
-- [Mongoose](https://mongoosejs.com) to model objects in MongoDB.
-- [Handlebars](https://handlebarsjs.com/) for the `home` template.
-- [ESLint](https://eslint.org) for linting.
-- [Nodemon](https://nodemon.io/) to reload the server automatically.
+### Features
 
-## Architecture
+- **User Authentication**: Acebook can allow users to register, login and logout securely. This feature enables users to create their own profiles and secure their data.
+- **User Profile**: Users can create and manage their profiles with photos, and personal information.
+- **Posts**: Users can create and share text and photos with other users. They can like, comment and share other users' posts and build a network of friends.
 
-This application is comprised of two distinct pieces.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- A backend API built with Express
-- A front end built with React
+### Built With
 
-The React front end sends HTTP requests to the backend API and receives JSON in response body, rather than a whole page of HTML.
+This project was built with the following tools:
 
-For example, the React front end would send this request to retrieve the entire `Post` collection.
+- [![React][react-shield]][react-url]
+- [![mongodb][mongodb-shield]][mongodb-url]
+- [![express][express-shield]][express-url]
+- [![tailwindcss][tailwindcss-shield]][tailwindcss-url]
+- [![Cypress][cypress-shield]][cypress-url]
+- [![Jest][jest-shield]][jest-url]
 
-```
-GET "/posts"
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-And the body of the response would look like this.
+<!-- GETTING STARTED -->
 
-```
-{
-    "posts": [
-        {
-            "_id": "62f8ef0e6c1ffcf74cbbb181",
-            "message": "Hello, this is my first Acebook post!",
-            "__v": 0
-        },
-        {
-            "_id": "62f8ef366c1ffcf74cbbb188",
-            "message": "Welcome to Acebook! Have an Acetime :)",
-            "__v": 0
-        },
-        {
-            "_id": "62f8f08af1cffef85a7426ae",
-            "message": "Thank you :D",
-            "__v": 0
-        }
-    ]
-}
-```
+## Getting Started
 
-Here's a diagram of the above
-<br>
-<br>
-![a diagram of the MERN stack](./diagrams/mern_stack.png)
-<br>
-<br>
+This section shows you how to set up this project locally. First, get a local copy up and running follow these simple steps.
 
-Once received by the React FE, the JSON in the response body is used to render a list of posts on the page.
+### Prerequisites
 
-![response body mapped onto a page](./diagrams/response_parsing.png)
+You have to make sure that `mongodb`, `npm` and `node` have been installed in your local machine before running the project. If not, follow the steps below.
 
-This architectural pattern is quite popular because it allows teams to build multiple front ends, all of which use the same backend API. You could, for example, go on to build a mobile app without needing to create another backend API.
-## Authentication
+- npm
 
-Up until now, if you've implemented authentication, it will likely have been done using sessions - this is a useful point of comparison but, if you haven't implemented authentication yet, that's not going to impede you right now.
+  ```sh
+  npm install npm@latest -g
+  npm -v
+  ```
 
-Here's the authentication flow for this application
+- nvm & node
 
-1. A registered user submits their email address and password via the React front end.
-2. The Express backend receives the data and tries to find a user in the DB with the same email address.
-3. If a user is found, the password in the database is compared to the password that was submitted.
-4. If the passwords match, a JSON Web Token is generated and returned, as part of the response.
-5. The React front end receives the token and holds on to it.
-6. Every request to `"/posts"` must include a valid token (which is checked by the backend).
-7. When the user logs out, the front end discards the token.
+  ```sh
+  # visit https://github.com/nvm-sh/nvm on how to install nvm
+  nvm install node
+  node -v
+  ```
 
-![authentication flow diagram](./diagrams/auth_flow.png)
+- mongodb
+  ```sh
+  brew tap mongodb/brew
+  brew install mongodb-community@5.0
+  brew services start mongodb-community@5.0
+  ```
 
-### What is a JSON Web Token?
+---
 
-A JSON Web Token, or JWT, is a token that comprises three parts
+### Installation
 
-- A header, which contains information about how the token was generated.
-- A signature, which is used to verify the token.
-- A payload, which you can use to store some **non-sensitive data** like a user id. Note that the payload is not secure and can be decoded very easily.
-
-The signature is created using a 'secret', which must be kept private (i.e. not put on GitHub) otherwise nefarious internet users could start to issue tokens for your application.
-
-Here, we've used an environment variable called `JWT_SECRET`, which you'll see used in the commands to start the application and run the tests (below). You can change the value of that environment variable to anything you like.
-## Card wall
-
-### [Trello Card Wall](https://trello.com/b/5w1rLYPF)
-
-## Quickstart
-
-### Install Node.js
-
-1. Install Node Version Manager (NVM)
+1. Clone the repo
+   ```sh
+   git clone https://github.com/terryhycheng/acebook.git
+   cd acebook
    ```
-   brew install nvm
-   ```
-   Then follow the instructions to update your `~/.bash_profile`.
-2. Open a new terminal
-3. Install the latest version of [Node.js](https://nodejs.org/en/), currently `18.1.0`.
-   ```
-   nvm install 18
+2. Install NPM packages
+
+   ```sh
+   cd frontend
+   npm install
+
+   cd ../api
+   npm install
    ```
 
-### Set up your project
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-1. Fork this repository
-2. Rename your fork to `acebook-<team name>`
-3. Clone your fork to your local machine
-4. Install Node.js dependencies for both FE and BE (API)
-   ```
-   ; cd api
-   ; npm install
-   ; cd ../frontend
-   ; npm install
-   ```
-5. Install an ESLint plugin for your editor. For example: [`linter-eslint`](https://github.com/AtomLinter/linter-eslint) for Atom.
-6. Install MongoDB
-   ```
-   brew tap mongodb/brew
-   brew install mongodb-community@5.0
-   ```
-   *Note:* If you see a message that says `If you need to have mongodb-community@5.0 first in your PATH, run:`, follow the instruction. Restart your terminal after this.
-7. Start MongoDB
-   ```
-   brew services start mongodb-community@5.0
-   ```
+---
 
 ### Start
 
-1. Start the server
+#### 1. Start the server
 
-  **Note the use of an environment variable for the JWT secret**
+You have to run the server before running the frontend. The server will be served at port `8080` by default. A `JWT_SECRET` is required to start the server.
 
-   ```
-   ; cd api
-   ; JWT_SECRET=SUPER_SECRET npm start
-   ```
-2. Start the front end
+```
+cd api
+JWT_SECRET=SUPER_SECRET npm start
+```
 
-  In a new terminal session...
+#### 2. Start the frontend
 
-  ```
-  ; cd frontend
-  ; npm start
-  ```
+In a new terminal session...
+
+```
+cd frontend
+npm run start
+```
 
 You should now be able to open your browser and go to `http://localhost:3000/signup` to create a new user.
 
@@ -189,68 +151,44 @@ Then, after signing up, you should be able to log in by going to `http://localho
 
 After logging in, you won't see much but you can create posts using PostMan and they should then show up in the browser if you refresh the page.
 
-### Testing
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- CONTRIBUTORS -->
 
-#### The Backend (API)
+## Contributors
 
-**Note the use of an environment variable for the JWT secret**
+We are team `Gelato Geniuses`, a team of six amazing, passionate and lovely junior software developers who love sharing where we can good ice-cream.
 
-  Start the server in test mode (so that it connects to the test DB)
+<table>
+  <tr>
+   <td align="center"><a href="https://github.com/Ajmakovsky"><img src="https://avatars.githubusercontent.com/u/119049584?v=4" width="150" alt="Abigail%20Makovsky"/><br />
+Abigail Makovsky</a></td>
+   <td align="center"><a href="https://github.com/AmberG31"><img src="https://avatars.githubusercontent.com/u/118190812?v=4" width="150" alt="Amber"/><br />Amber</a></td>
+   <td align="center"><a href="https://github.com/pieslappa"><img src="https://avatars.githubusercontent.com/u/34448070?v=4" width="150" alt="Chris%20Leech"/><br />Chris Leech</a></td>
+   <td align="center"><a href="https://github.com/joel-powell"><img src="https://avatars.githubusercontent.com/u/93681480?v=4" width="150" alt="Joel%20Powell"/><br />Joel Powell</a></td>
+   <td align="center"><a href="https://github.com/terryhycheng"><img src="https://avatars.githubusercontent.com/u/35667554?v=4" width="150" alt="Terry%20Cheng"/><br />Terry Cheng</a></td>
+   <td align="center"><a href="https://github.com/uzair142"><img src="https://avatars.githubusercontent.com/u/113887346?v=4" width="150" alt="Uzair%20Patel"/><br />Uzair Patel</a></td>
+  </tr>
+</table>
 
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
-  ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-  Then run the tests in a new terminal session
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run test
-  ```
-
-#### The frontend (React)
-
-**Note the use of an environment variable for the JWT secret**
-
-  Start the server in test mode (so that it connects to the test DB)
-
-  ```
-  ; cd api
-  ; JWT_SECRET=SUPER_SECRET npm run start:test
-  ```
-
-  Then start the front end in a new terminal session
-
-  ```
-  ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm start
-  ```
-
-  Then run the tests in a new terminal session
-
-  ```
-  ; cd frontend
-  ; JWT_SECRET=SUPER_SECRET npm run test
-  ```
-
-## MongoDB Connection Errors?
-
-Some people occasionally experience MongoDB connection errors when running the tests or trying to use the application. Here are some tips which might help resolve such issues.
-
-- Check that MongoDB is installed using `mongo --version`
-- Check that it's running using `brew services list`
-
-If you have issues that are not resolved by these tips, please reach out to a coach and, once the issue is resolved, we can add a new tip!
-
-
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
-
----
-
-**How was this resource?**  
-[😫](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😫) [😕](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😕) [😐](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😐) [🙂](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=🙂) [😀](https://airtable.com/shrUJ3t7KLMqVRFKR?prefill_Repository=makersacademy%2Facebook-mern-template&prefill_File=README.md&prefill_Sentiment=😀)  
-Click an emoji to tell us.
-
-<!-- END GENERATED SECTION DO NOT EDIT -->
+[typescript-shield]: https://img.shields.io/badge/Typescript-3178c6?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[circleci-shield]: https://img.shields.io/badge/circleci-000000?style=for-the-badge&logo=circleci&logoColor=white
+[circleci-url]: https://circleci.com/
+[jest-shield]: https://img.shields.io/badge/jest-c21325?style=for-the-badge&logo=jest&logoColor=white
+[jest-url]: https://jestjs.io/
+[react-shield]: https://img.shields.io/badge/reactjs-20232a?style=for-the-badge&logo=react&logoColor=61dafb
+[react-url]: https://reactjs.org/
+[cypress-shield]: https://img.shields.io/badge/cypress-007780?style=for-the-badge&logo=cypress&logoColor=white
+[cypress-url]: https://www.cypress.io/
+[tailwindcss-shield]: https://img.shields.io/badge/tailwindcss-0f172a?style=for-the-badge&logo=tailwindcss&logoColor=38BDF8
+[tailwindcss-url]: https://tailwindcss.com/
+[mongodb-shield]: https://img.shields.io/badge/mongodb-023430?style=for-the-badge&logo=mongodb&logoColor=white
+[mongodb-url]: https://www.mongodb.com/
+[express-shield]: https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white
+[express-url]: https://expressjs.com/

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { useContext, useState } from "react";
 import { PencilIcon } from "@heroicons/react/24/solid";
 import { AuthContext } from "../../contexts/AuthContext";

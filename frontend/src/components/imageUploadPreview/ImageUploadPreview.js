@@ -1,3 +1,5 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable consistent-return */
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
